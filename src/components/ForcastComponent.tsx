@@ -39,9 +39,7 @@ export default function ForcastComponent(props: ForcastComponentProps) {
                                 <Image width={48} height={48} src={"https:" + day.day.condition.icon} alt={day.day.condition.text}
                                 />
                             </div>
-                            <p className="flex-1">Max: {day.day.maxtemp_c.toFixed(1)}°C</p>
-                            <p className="flex-1">Min: {day.day.mintemp_c.toFixed(1)}°C</p>
-                            {/*<p>Humidity: {day.day.avghumidity}%</p>*/}
+                            <p className="flex-1">{day.day.maxtemp_c.toFixed(1)}°C / {day.day.mintemp_c.toFixed(1)}°C</p>
                         </div>
                     ))}
                 </div>
