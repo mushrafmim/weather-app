@@ -2,12 +2,31 @@ import {Skeleton} from "@/components/ui/skeleton";
 import {Droplets, RefreshCcwIcon, SunIcon, WindIcon} from "lucide-react";
 import Image from "next/image";
 import {useCurrentWeather} from "@/context/CurrentWeatherContext";
+import {useEffect, useState} from "react";
 
 export default function WeatherInfo() {
     const {weatherData, status, fetchWeatherData} = useCurrentWeather();
+    const [refreshEnabled, setRefreshEnabled] = useState(false);
+
+    useEffect(() => {
+        const checkTime = () => {
+            if (weatherData) {
+                const localtime = new Date(weatherData.location.localtime).getTime();
+                const now = new Date().getTime();
+                const diffInSeconds = (now - localtime) / 1000;
+
+                setRefreshEnabled(diffInSeconds > 120); // enable if more than 2 minutes
+            }
+        };
+
+        // Check immediately and then every 10 seconds
+        checkTime();
+        const interval = setInterval(checkTime, 10000);
+
+        return () => clearInterval(interval);
+    }, [weatherData]);
 
     return (
-
         <>
             {status === "loading" ? <div className="flex flex-col space-y-3">
                 <Skeleton className="h-12 w-2/3"/>
@@ -24,8 +43,7 @@ export default function WeatherInfo() {
                         <div className="flex items-center gap-2">
                             <div className="font-semibold text-sm">Last
                                 Updated {new Date(weatherData.location.localtime).toLocaleTimeString()}</div>
-                            {(new Date().getTime() - new Date(weatherData.location.localtime).getTime()) / 1000 > 120 ?
-                                <RefreshCcwIcon size={16} onClick={() => fetchWeatherData()}/> : null}
+                            {refreshEnabled && <RefreshCcwIcon size={16} onClick={() => fetchWeatherData()}/>}
                         </div>
                     </div>
                     <div className="flex items-center justify-between">
