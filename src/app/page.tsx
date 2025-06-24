@@ -9,13 +9,22 @@ import Image from "next/image";
 
 export default function Home() {
     const [searchKey, setSearchKey] = useState("Colombo")
-    const [currentLocation, setCurrentLocation] = useState("Colombo");
+    const [currentLocation, setCurrentLocation] = useState<SearchLocationType>({
+        id: 2842281,
+        name: "Colombo",
+        region: "Western",
+        country: "Sri Lanka",
+        tz_id: "Asia/Colombo",
+        lat: 6.9319,
+        lon: 79.8478,
+    });
     const [searchLocationResults, setSearchLocationResults] = useState<SearchLocationType[]>([]);
     const [weatherData, setWeatherData] = useState<CurrentWeatherType | null>(null);
 
 
-    const fetchWeatherData = async (location: string) => {
+    const fetchWeatherData = async () => {
         try {
+            const location = `${currentLocation.lat},${currentLocation.lon}`
             const data = await fetchData(location);
             if (data) {
                 setWeatherData(data);
@@ -39,13 +48,13 @@ export default function Home() {
     };
 
     useEffect(() => {
-        fetchWeatherData(currentLocation);
+        fetchWeatherData();
     }, [currentLocation]);
 
     return (
         <div className="container mx-auto p-4">
             <div className="flex flex-wrap">
-                <div className="h-16 w-1/3">
+                <div className="h-16 w-full md:w-1/3 mb-4 md:mb-0">
                     <div className="flex gap-2 items-center bg-white/40 rounded-lg shadow-sm p-2 relative">
                         <SearchIcon size={20}/>
                         <input
@@ -64,7 +73,7 @@ export default function Home() {
                                             key={location.id}
                                             className="cursor-pointer hover:bg-gray-100 p-2"
                                             onClick={() => {
-                                                setCurrentLocation(location.name);
+                                                setCurrentLocation(location);
                                                 setSearchKey(location.name);
                                                 setSearchLocationResults([]);
                                             }}
@@ -88,8 +97,9 @@ export default function Home() {
                         </div>
                         <div className="flex items-center justify-between">
                             <div>
-                                {weatherData && <Image width={192} height={192} src={"https:" + weatherData.current.condition.icon}
-                                       alt="Weather Icon"/>}
+                                {weatherData &&
+                                    <Image width={192} height={192} src={"https:" + weatherData.current.condition.icon}
+                                           alt="Weather Icon"/>}
                             </div>
                             <div className="text-center">
                                 <div className="flex items-start text-2xl font-semibold">
@@ -157,7 +167,9 @@ export default function Home() {
                     </div>
                     <div className="text-3xl font-bold">{weatherData?.current.wind_kph} Km/h</div>
                 </div>
-                <ForcastComponent location={currentLocation}/>
+                <div className="col-span-5 md:col-span-2">
+                    <ForcastComponent location={currentLocation.name}/>
+                </div>
             </div>
         </div>
     );

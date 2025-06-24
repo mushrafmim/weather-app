@@ -5,5 +5,5 @@ export type SearchLocationType = {
     country: string;
     lat: number;
     lon: number;
-    url: string;
+    tz_id: string;
 }

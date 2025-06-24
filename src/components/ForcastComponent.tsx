@@ -28,7 +28,7 @@ export default function ForcastComponent(props: ForcastComponentProps) {
     }, [location]);
 
     return (
-        <div className="p-4 col-span-2 bg-white/20 rounded-lg shadow-md">
+        <div className="p-4 bg-white/20 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4">Weather Forecast for {location}</h2>
             {forecastData ? (
                 <div className="">
