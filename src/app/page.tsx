@@ -6,9 +6,10 @@ import {CurrentWeatherType} from "@/types/CurrentWeatherType";
 import {SearchLocationType} from "@/types/SearchLocationType";
 import ForcastComponent from "@/components/ForcastComponent";
 import Image from "next/image";
+import {APIProvider, Map, MapCameraChangedEvent} from "@vis.gl/react-google-maps";
 
 export default function Home() {
-    const [searchKey, setSearchKey] = useState("Colombo")
+    const [searchKey, setSearchKey] = useState("Colombo, Sri Lanka")
     const [currentLocation, setCurrentLocation] = useState<SearchLocationType>({
         id: 2842281,
         name: "Colombo",
@@ -74,7 +75,7 @@ export default function Home() {
                                             className="cursor-pointer hover:bg-gray-100 p-2"
                                             onClick={() => {
                                                 setCurrentLocation(location);
-                                                setSearchKey(location.name);
+                                                setSearchKey(`${location.name}, ${location.country}`);
                                                 setSearchLocationResults([]);
                                             }}
                                         >
@@ -87,9 +88,9 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className="grid grid-cols-5 gap-4">
+            <div className="grid grid-cols-4 gap-4">
                 <div
-                    className="bg-sky-600/20 shadow-sm col-span-5 md:col-span-2 backdrop-blur-md border border-white/40 rounded-2xl p-8 text-white">
+                    className="bg-sky-600/20 shadow-sm col-span-4 md:col-span-2 backdrop-blur-md border border-white/40 rounded-2xl p-8 text-white">
                     <div>
                         <div className="mb-4">
                             <span
@@ -144,13 +145,24 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <div className="flex gap-2 text-zinc-500 mb-2 font-semibold">
-                        <Droplets/>
-                        <div>Humidity</div>
-                    </div>
-                    <div className="text-2xl font-bold">{weatherData?.current.humidity}%</div>
+                <div className="md:col-span-2 rounded-2xl overflow-hidden shadow-sm col-span-4">
+                    <APIProvider apiKey={process.env.NEXT_PUBLIC_MAPS_API_KEY || ''}>
+                        <Map
+                            defaultZoom={10}
+                            center={{lat: currentLocation.lat, lng: currentLocation.lon}}
+                            onCameraChanged={(ev: MapCameraChangedEvent) =>
+                                console.log('camera changed:', ev.detail.center, 'zoom:', ev.detail.zoom)
+                            }>
+                        </Map>
+                    </APIProvider>
                 </div>
+                {/*<div className="bg-white col-span-2 p-4 rounded-lg shadow-sm">*/}
+                {/*    <div className="flex gap-2 text-zinc-500 mb-2 font-semibold">*/}
+                {/*        <Droplets/>*/}
+                {/*        <div>Humidity</div>*/}
+                {/*    </div>*/}
+                {/*    <div className="text-2xl font-bold">{weatherData?.current.humidity}%</div>*/}
+                {/*</div>*/}
                 <div className="bg-white p-4 rounded-lg shadow-sm">
                     <div className="flex gap-2 text-zinc-500 mb-2 font-semibold">
                         <SunIcon/>
@@ -168,7 +180,9 @@ export default function Home() {
                     <div className="text-3xl font-bold">{weatherData?.current.wind_kph} Km/h</div>
                 </div>
                 <div className="col-span-5 md:col-span-2">
-                    <ForcastComponent location={currentLocation.name}/>
+                    <ForcastComponent location={currentLocation.name} />
+                </div>
+                <div className="col-span-5 md:col-span-2">
                 </div>
             </div>
         </div>
