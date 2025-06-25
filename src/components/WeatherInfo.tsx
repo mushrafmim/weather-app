@@ -3,10 +3,13 @@ import {Droplets, RefreshCcwIcon, SunIcon, WindIcon} from "lucide-react";
 import Image from "next/image";
 import {useCurrentWeather} from "@/context/CurrentWeatherContext";
 import {useEffect, useState} from "react";
+import {useCurrentSettings} from "@/context/SettingsContext";
 
 export default function WeatherInfo() {
     const {weatherData, status, fetchWeatherData} = useCurrentWeather();
     const [refreshEnabled, setRefreshEnabled] = useState(false);
+
+    const {settings} = useCurrentSettings();
 
     useEffect(() => {
         const checkTime = () => {
@@ -56,13 +59,13 @@ export default function WeatherInfo() {
                         </div>
                         <div className="text-center">
                             <div className="flex items-start text-2xl font-semibold">
-                                <div className="text-8xl font-bold pt-2">{weatherData.current.temp_c}
+                                <div className="text-8xl font-bold pt-2">{settings.temperatureUnit === "°C" ? weatherData.current.temp_c: weatherData.current.temp_f}
                                 </div>
                                 <div>
-                                    °&nbsp;C
+                                    {settings.temperatureUnit}
                                 </div>
                             </div>
-                            <div className="font-semibold">Feels Like {weatherData.current.feelslike_c} °&nbsp;C</div>
+                            <div className="font-semibold">Feels Like {settings.temperatureUnit === "°C" ? weatherData.current.feelslike_c: weatherData.current.feelslike_f}°</div>
                         </div>
                     </div>
                     {/*{weatherData?.location.lat}° N, {weatherData?.location.lon}° E*/}

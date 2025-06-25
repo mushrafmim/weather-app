@@ -3,6 +3,7 @@ import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
 import {CurrentWeatherProvider} from "@/context/CurrentWeatherContext";
 import {WeatherForecastProvider} from "@/context/WeatherForecastContext";
+import {SettingsProvider} from "@/context/SettingsContext";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -26,15 +27,17 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-        <CurrentWeatherProvider>
-            <WeatherForecastProvider>
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased bg-no-repeat bg-cover min-h-screen`}
-            >
-            {children}
-            </body>
-            </WeatherForecastProvider>
-        </CurrentWeatherProvider>
+        <SettingsProvider>
+            <CurrentWeatherProvider>
+                <WeatherForecastProvider>
+                    <body
+                        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-no-repeat bg-cover min-h-screen`}
+                    >
+                    {children}
+                    </body>
+                </WeatherForecastProvider>
+            </CurrentWeatherProvider>
+        </SettingsProvider>
         </html>
     );
 }

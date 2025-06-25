@@ -1,8 +1,11 @@
 import MetricCard from "@/components/ui/MetricCard";
 import {useCurrentWeather} from "@/context/CurrentWeatherContext";
 import {Droplet} from "lucide-react";
+import {useCurrentSettings} from "@/context/SettingsContext";
 
 export default function HumidityCard() {
+
+    const {settings} = useCurrentSettings();
 
     const {status, weatherData} = useCurrentWeather();
 
@@ -12,11 +15,11 @@ export default function HumidityCard() {
                 <Droplet/>
                 <div>Humidity</div>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center mb-4">
                 <div className="text-7xl font-bold text-white text-center">{weatherData?.current.humidity}%</div>
             </div>
-            <div className="text-center text-white font-semibold mb-4">Dew
-                Point {weatherData?.current.dewpoint_c} °&nbsp;C
+            <div className="text-center text-white font-semibold">Dew
+                Point {settings.temperatureUnit === "°C" ? weatherData?.current.dewpoint_c: weatherData?.current.dewpoint_f}°
             </div>
         </MetricCard>
     );

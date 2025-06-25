@@ -2,17 +2,19 @@
 
 import Image from "next/image";
 import {useWeatherForecast} from "@/context/WeatherForecastContext";
+import {useCurrentSettings} from "@/context/SettingsContext";
 
-export type ForcastComponentProps = {
+export type ForecastComponentProps = {
     location: string;
 }
-export default function ForecastComponent(props: ForcastComponentProps) {
+export default function ForecastComponent(props: ForecastComponentProps) {
     const {location} = props;
 
+    const {settings} = useCurrentSettings();
     const { forecastData } = useWeatherForecast()
 
     return (
-        <div className="p-4 bg-sky-600/20 shadow-sm backdrop-blur-md border border-white/40 rounded-2xl overflow-x-auto scrollbar-hide h-full">
+        <div className="p-4 bg-sky-600/20 shadow-sm backdrop-blur-md border border-white/40 rounded-2xl overflow-x-auto scrollbar-hide h-full text-white">
             <h2 className="text-2xl font-bold mb-4">Weather Forecast for {location}</h2>
             {forecastData ? (
                 <div className="">
@@ -23,7 +25,8 @@ export default function ForecastComponent(props: ForcastComponentProps) {
                                 <Image width={48} height={48} src={"https:" + day.day.condition.icon} alt={day.day.condition.text}
                                 />
                             </div>
-                            <p className="flex-1">{day.day.maxtemp_c.toFixed(1)}°C / {day.day.mintemp_c.toFixed(1)}°C</p>
+                            {settings.temperatureUnit == "°C" && <p className="flex-1">{day.day.maxtemp_c.toFixed(1)}°C / {day.day.mintemp_c.toFixed(1)}°</p>}
+                            {settings.temperatureUnit == "°F" && <p className="flex-1">{day.day.maxtemp_f.toFixed(1)}°F / {day.day.mintemp_f.toFixed(1)}°</p>}
                         </div>
                     ))}
                 </div>

@@ -8,6 +8,7 @@ import UVIndex from "@/components/UVIndex";
 import Wind from "@/components/Wind";
 import DayForecastComponent from "@/components/DayForecastComponent";
 import HumidityCard from "@/components/HumidityCard";
+import SettingsComponent from "@/components/SettingsComponent";
 
 export default function Home() {
 
@@ -20,10 +21,11 @@ export default function Home() {
     return (
         <div className={`w-full min-h-dvh ${backgroundClass}`}>
             <div className="container mx-auto p-4">
-                <div className="flex flex-wrap">
-                    <div className="h-16 w-full md:w-1/3 mb-4 md:mb-0">
+                <div className="flex flex-wrap items-center justify-between h-16">
+                    <div className="w-full md:w-1/3 md:mb-0 items-center">
                         <LocationSearch/>
                     </div>
+                    <SettingsComponent />
                 </div>
                 <div className="grid grid-cols-2 auto-cols-fr md:grid-cols-4 gap-4 auto-rows-[190px] m-auto">
                     <div

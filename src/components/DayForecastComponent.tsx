@@ -1,7 +1,10 @@
 import {useWeatherForecast} from "@/context/WeatherForecastContext";
 import Image from "next/image";
+import {useCurrentSettings} from "@/context/SettingsContext";
 
 export default function DayForecastComponent() {
+
+    const {settings} = useCurrentSettings();
 
     const {forecastData} = useWeatherForecast()
 
@@ -23,7 +26,7 @@ export default function DayForecastComponent() {
                     >
                         <div className="text-center">{new Date(hour.time).getHours()}:00</div>
                         <Image draggable={"false"} src={"https:" + hour.condition.icon} alt={"Weather icon"} width={80} height={80}/>
-                        <div className="text-center">{hour.temp_c}°&nbsp;C</div>
+                        <div className="text-center">{settings.temperatureUnit === "°C" ? hour.temp_c: hour.temp_f}°</div>
                     </div>
                 ))}
             </div>

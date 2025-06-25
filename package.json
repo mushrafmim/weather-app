@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-select": "^2.2.5",
     "@tabler/icons-react": "^3.34.0",
     "@vis.gl/react-google-maps": "^1.5.3",
     "class-variance-authority": "^0.7.1",

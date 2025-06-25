@@ -51,7 +51,7 @@ export default function LocationSearch() {
     };
 
     return (
-        <>
+        <div>
             <div className="flex gap-2 items-center bg-white/40 rounded-lg shadow-sm p-2 relative">
                 <SearchIcon size={20}/>
                 <input
@@ -62,7 +62,7 @@ export default function LocationSearch() {
                 {searchKey && <X className="cursor-pointer" size={20} onClick={() => setSearchKey("")}/>}
                 <IconLocation onClick={getLocation} />
             </div>
-            <div className="relative bg-green w-full h-16">
+            <div className="relative">
                 {searchLocationResults.length > 0 && (
                     <div className="absolute bg-white shadow-lg rounded-lg mt-2 z-10 left-0 right-0">
                         <ul>
@@ -83,6 +83,6 @@ export default function LocationSearch() {
                     </div>
                 )}
             </div>
-        </>
+        </div>
     )
 }
