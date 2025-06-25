@@ -11,23 +11,8 @@ export default function ForecastComponent(props: ForcastComponentProps) {
 
     const { forecastData } = useWeatherForecast()
 
-
-    // useEffect(() => {
-    //     getForcast(location)
-    //         .then(data => {
-    //             if (data) {
-    //                 setForecastData(data);
-    //             } else {
-    //                 console.error("Failed to fetch forecast data");
-    //             }
-    //         })
-    //         .catch(error => {
-    //             console.error("Error fetching forecast data:", error);
-    //         });
-    // }, [location]);
-
     return (
-        <div className="p-4 bg-white/20 rounded-lg shadow-md h-full">
+        <div className="p-4 bg-sky-600/20 shadow-sm backdrop-blur-md border border-white/40 rounded-2xl overflow-x-auto scrollbar-hide h-full">
             <h2 className="text-2xl font-bold mb-4">Weather Forecast for {location}</h2>
             {forecastData ? (
                 <div className="">

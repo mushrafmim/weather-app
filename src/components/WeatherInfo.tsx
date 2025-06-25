@@ -27,7 +27,7 @@ export default function WeatherInfo() {
     }, [weatherData]);
 
     return (
-        <>
+        <div>
             {status === "loading" ? <div className="flex flex-col space-y-3">
                 <Skeleton className="h-12 w-2/3"/>
                 <Skeleton className="h-4 w-1/2"/>
@@ -97,6 +97,6 @@ export default function WeatherInfo() {
                     </div>
                 </div>
             )}
-        </>
+        </div>
     )
 }

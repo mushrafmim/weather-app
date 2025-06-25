@@ -21,23 +21,29 @@ export default function Home() {
                     <LocationSearch/>
                 </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[190px] m-auto">
+            <div className="grid grid-cols-2 auto-cols-fr md:grid-cols-4 gap-4 auto-rows-[190px] m-auto">
                 <div
                     className="bg-sky-600/20 shadow-sm col-span-2 row-span-2 backdrop-blur-md border border-white/40 rounded-2xl p-8 text-white">
                     <WeatherInfo/>
                 </div>
-                <div className="md:col-span-2 rounded-2xl overflow-hidden shadow-sm col-span-4 row-span-2">
+                <div className="md:col-span-2 rounded-2xl overflow-hidden shadow-sm col-span-2 row-span-2">
                     <LocationMap/>
                 </div>
-                <div className="col-span-5 md:col-span-2 row-span-3">
+                <div className="col-span-2 md:col-span-2 row-span-3">
                     <ForecastComponent location={currentLocation.name}/>
                 </div>
-                <div className="col-span-5 md:col-span-2 row-span-3">
+                <div className="col-span-2 md:col-span-2 md:col-start-3 md:row-start-3 row-span-3">
                     <DayForecastComponent/>
                 </div>
-                <UVIndex/>
+                <div className="md:col-start-3 md:row-start-4">
+                    <UVIndex/>
+                </div>
+                <div className="md:col-start-4 md:row-start-4">
                 <Wind/>
-                <HumidityCard />
+                </div>
+                <div className="md:col-start-3 md:row-start-5">
+                <HumidityCard/>
+                </div>
             </div>
         </div>
     );
