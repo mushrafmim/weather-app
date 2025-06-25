@@ -25,8 +25,8 @@ export default function ForecastComponent(props: ForecastComponentProps) {
                                 <Image width={48} height={48} src={"https:" + day.day.condition.icon} alt={day.day.condition.text}
                                 />
                             </div>
-                            {settings.temperatureUnit == "°C" && <p className="flex-1">{day.day.maxtemp_c.toFixed(1)}°C / {day.day.mintemp_c.toFixed(1)}°</p>}
-                            {settings.temperatureUnit == "°F" && <p className="flex-1">{day.day.maxtemp_f.toFixed(1)}°F / {day.day.mintemp_f.toFixed(1)}°</p>}
+                            {settings.temperatureUnit == "°C" && <p className="flex-1">{day.day.maxtemp_c.toFixed(1)}° / {day.day.mintemp_c.toFixed(1)}°</p>}
+                            {settings.temperatureUnit == "°F" && <p className="flex-1">{day.day.maxtemp_f.toFixed(1)}° / {day.day.mintemp_f.toFixed(1)}°</p>}
                         </div>
                     ))}
                 </div>
