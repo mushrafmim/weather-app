@@ -1,34 +1,33 @@
 "use client";
 
-import {useEffect, useState} from "react";
-import {getForcast} from "@/requests";
 import Image from "next/image";
-import {ForcastWeatherType} from "@/types/ForcastWeatherType";
+import {useWeatherForecast} from "@/context/WeatherForecastContext";
 
 export type ForcastComponentProps = {
     location: string;
 }
-export default function ForcastComponent(props: ForcastComponentProps) {
-    const [forecastData, setForecastData] = useState<ForcastWeatherType | null>(null);
+export default function ForecastComponent(props: ForcastComponentProps) {
     const {location} = props;
 
+    const { forecastData } = useWeatherForecast()
 
-    useEffect(() => {
-        getForcast(location)
-            .then(data => {
-                if (data) {
-                    setForecastData(data);
-                } else {
-                    console.error("Failed to fetch forecast data");
-                }
-            })
-            .catch(error => {
-                console.error("Error fetching forecast data:", error);
-            });
-    }, [location]);
+
+    // useEffect(() => {
+    //     getForcast(location)
+    //         .then(data => {
+    //             if (data) {
+    //                 setForecastData(data);
+    //             } else {
+    //                 console.error("Failed to fetch forecast data");
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.error("Error fetching forecast data:", error);
+    //         });
+    // }, [location]);
 
     return (
-        <div className="p-4 bg-white/20 rounded-lg shadow-md">
+        <div className="p-4 bg-white/20 rounded-lg shadow-md h-full">
             <h2 className="text-2xl font-bold mb-4">Weather Forecast for {location}</h2>
             {forecastData ? (
                 <div className="">

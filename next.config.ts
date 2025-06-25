@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
                 pathname: "/weather/**"
             }
         ]
-    }
+    },
 };
 
 export default nextConfig;

@@ -46,12 +46,13 @@ export default function WeatherInfo() {
                             {refreshEnabled && <RefreshCcwIcon size={16} onClick={() => fetchWeatherData()}/>}
                         </div>
                     </div>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mb-4">
                         <div>
                             {weatherData &&
-                                <Image width={192} height={192}
+                                <Image width={150} height={150}
                                        src={"https:" + weatherData.current.condition.icon}
                                        alt="Weather Icon"/>}
+                            <div className="font-semibold text-center">{weatherData.current.condition.text}</div>
                         </div>
                         <div className="text-center">
                             <div className="flex items-start text-2xl font-semibold">
@@ -61,7 +62,7 @@ export default function WeatherInfo() {
                                     °&nbsp;C
                                 </div>
                             </div>
-                            <div className="font-semibold">{weatherData.current.condition.text}</div>
+                            <div className="font-semibold">Feels Like {weatherData.current.feelslike_c} °&nbsp;C</div>
                         </div>
                     </div>
                     {/*{weatherData?.location.lat}° N, {weatherData?.location.lon}° E*/}
