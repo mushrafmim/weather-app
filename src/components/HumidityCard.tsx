@@ -15,10 +15,10 @@ export default function HumidityCard() {
                 <Droplet/>
                 <div>Humidity</div>
             </div>
-            <div className="flex flex-col items-center mb-4">
-                <div className="text-7xl font-bold text-white text-center">{weatherData?.current.humidity}%</div>
+            <div className="flex flex-col items-center mb-4 relative">
+                <div className="text-6xl md:text-7xl font-bold text-white text-center">{weatherData?.current.humidity}%</div>
             </div>
-            <div className="text-center text-white font-semibold">Dew
+            <div className="text-center text-white font-semibold absolute bottom-4 left-0 right-0">Dew
                 Point {settings.temperatureUnit === "°C" ? weatherData?.current.dewpoint_c: weatherData?.current.dewpoint_f}°
             </div>
         </MetricCard>

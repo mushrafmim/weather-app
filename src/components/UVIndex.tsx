@@ -29,7 +29,7 @@ export default function UVIndex() {
                 <div>UV Index</div>
             </div>
             <div className="flex flex-col items-center">
-                <div className="text-7xl font-bold text-white text-center">{weatherData?.current.uv}</div>
+                <div className="text-6xl md:text-7xl font-bold text-white text-center">{weatherData?.current.uv}</div>
             </div>
             <div className="text-center text-white font-semibold mb-4">{uvIndexText}</div>
             <div

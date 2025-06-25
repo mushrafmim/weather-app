@@ -14,7 +14,7 @@ export default function Wind() {
                 </div>
             </div>
             <div className="flex flex-col items-center">
-                <div className="text-center text-7xl mb-4 font-bold text-white">{weatherData?.current.wind_kph}<span
+                <div className="text-center text-6xl md:text-7xl mb-4 font-bold text-white">{weatherData?.current.wind_kph}<span
                     className="text-sm">Km/h</span></div>
                 <div className="flex gap-2">
                 <div className="flex gap-2 text-white font-semibold">{weatherData?.current.wind_degree}°</div>
