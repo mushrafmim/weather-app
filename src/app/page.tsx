@@ -7,6 +7,7 @@ import WeatherInfo from "@/components/WeatherInfo";
 import UVIndex from "@/components/UVIndex";
 import Wind from "@/components/Wind";
 import DayForecastComponent from "@/components/DayForecastComponent";
+import HumidityCard from "@/components/HumidityCard";
 
 export default function Home() {
 
@@ -31,13 +32,12 @@ export default function Home() {
                 <div className="col-span-5 md:col-span-2 row-span-3">
                     <ForecastComponent location={currentLocation.name}/>
                 </div>
-                <div>
-                    <UVIndex/>
-                </div>
-                <Wind/>
                 <div className="col-span-5 md:col-span-2 row-span-3">
                     <DayForecastComponent/>
                 </div>
+                <UVIndex/>
+                <Wind/>
+                <HumidityCard />
             </div>
         </div>
     );

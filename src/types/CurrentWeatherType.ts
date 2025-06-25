@@ -36,5 +36,7 @@ export type CurrentWeatherType = {
         vis_miles: number;
         uv: number;
         gust_kph: number;
+        dewpoint_c: number;
+        dewpoint_f: number;
     };
 }
