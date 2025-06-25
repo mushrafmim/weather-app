@@ -2,7 +2,20 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Then, Place the following API keys in a `.env.local` file at the root of your project:
+
+```plaintext
+NEXT_PUBLIC_WEATHER_API_KEY=
+NEXT_PUBLIC_MAPS_API_KEY=
+```
+
+Run the development server:
 
 ```bash
 npm run dev
