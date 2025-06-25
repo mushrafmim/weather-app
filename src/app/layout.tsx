@@ -24,20 +24,12 @@ export default function RootLayout({
                                    }: Readonly<{
     children: React.ReactNode;
 }>) {
-    // Update the background based on time of day
-    const currentHour = new Date().getHours();
-    const isDayTime = currentHour >= 6 && currentHour < 18;
-
-    const backgroundClass = isDayTime
-        ? "bg-gradient-to-b from-sky-400 via-blue-300 to-blue-400"
-        : "bg-gradient-to-b from-gray-800 via-gray-700 to-gray-600";
-
     return (
         <html lang="en">
         <CurrentWeatherProvider>
             <WeatherForecastProvider>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased ${backgroundClass} bg-no-repeat bg-cover min-h-screen`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased bg-no-repeat bg-cover min-h-screen`}
             >
             {children}
             </body>
