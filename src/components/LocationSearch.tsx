@@ -1,5 +1,5 @@
 import {SearchIcon, X} from "lucide-react";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {SearchLocationType} from "@/types/SearchLocationType";
 import {searchLocations} from "@/requests";
 import {useCurrentWeather} from "@/context/CurrentWeatherContext";
@@ -9,7 +9,7 @@ export default function LocationSearch() {
     const [searchKey, setSearchKey] = useState("Colombo, Sri Lanka")
     const [searchLocationResults, setSearchLocationResults] = useState<SearchLocationType[]>([]);
 
-    const { setCurrentLocation } = useCurrentWeather();
+    const { currentLocation, setCurrentLocation } = useCurrentWeather();
 
     const handleSearch = async (query: string) => {
         setSearchKey(query);
@@ -50,16 +50,30 @@ export default function LocationSearch() {
         );
     };
 
+    const locationSearchRef = useRef<HTMLInputElement>(null);
+
+    const onLocationClear = () => {
+        setSearchKey("");
+        locationSearchRef.current?.focus();
+    }
+
     return (
         <div>
             <div className="flex gap-2 items-center bg-white/40 rounded-lg shadow-sm p-2 relative">
                 <SearchIcon size={20}/>
                 <input
                     className="outline-none border-none active:none focus-visible:outline-none focus-visible:ring-0 flex-1"
+                    ref={locationSearchRef}
                     value={searchKey}
                     onChange={(e) => handleSearch(e.target.value)}
+                    onBlur={() => {
+                        if (searchKey.trim() === "") {
+                            console.log("Hello.")
+                            setSearchKey(`${currentLocation.name}, ${currentLocation.country}`);
+                        }
+                    }}
                 />
-                {searchKey && <X className="cursor-pointer" size={20} onClick={() => setSearchKey("")}/>}
+                {searchKey && <X className="cursor-pointer" size={20} onClick={onLocationClear}/>}
                 <IconLocation onClick={getLocation} />
             </div>
             <div className="relative">
