@@ -21,8 +21,8 @@ export default function Home() {
     return (
         <div className={`w-full min-h-dvh ${backgroundClass}`}>
             <div className="container mx-auto p-4">
-                <div className="flex flex-wrap items-center justify-between h-16">
-                    <div className="w-full md:w-1/3 md:mb-0 items-center">
+                <div className="flex flex-wrap items-center justify-between h-16 gap-4">
+                    <div className="flex-1 md:max-w-1/3 md:mb-0 items-center">
                         <LocationSearch/>
                     </div>
                     <SettingsComponent />
@@ -38,7 +38,7 @@ export default function Home() {
                     <div className="col-span-2 md:col-span-2 row-span-3">
                         <ForecastComponent location={currentLocation.name}/>
                     </div>
-                    <div className="col-span-2 md:col-span-2 md:col-start-3 md:row-start-3 row-span-3">
+                    <div className="col-span-2 md:col-span-2 md:col-start-3 md:row-start-3">
                         <DayForecastComponent/>
                     </div>
                     <div className="md:col-start-3 md:row-start-4">
