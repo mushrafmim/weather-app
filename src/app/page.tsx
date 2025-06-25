@@ -29,7 +29,7 @@ export default function Home() {
                 </div>
                 <div className="grid grid-cols-2 auto-cols-fr md:grid-cols-4 gap-4 auto-rows-[190px] m-auto">
                     <div
-                        className="bg-sky-600/20 shadow-sm col-span-2 row-span-2 backdrop-blur-md border border-white/40 rounded-2xl p-8 text-white">
+                        className="bg-sky-600/20 shadow-sm col-span-2 row-span-2 backdrop-blur-md border border-white/40 rounded-2xl p-4 text-white">
                         <WeatherInfo/>
                     </div>
                     <div className="md:col-span-2 rounded-2xl overflow-hidden shadow-sm col-span-2 row-span-2">

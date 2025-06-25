@@ -59,7 +59,7 @@ export default function WeatherInfo() {
                         </div>
                         <div className="text-center">
                             <div className="flex items-start text-2xl font-semibold">
-                                <div className="text-8xl font-bold pt-2">{settings.temperatureUnit === "°C" ? weatherData.current.temp_c: weatherData.current.temp_f}
+                                <div className="text-5xl md:text-8xl font-bold pt-2">{settings.temperatureUnit === "°C" ? weatherData.current.temp_c: weatherData.current.temp_f}
                                 </div>
                                 <div>
                                     {settings.temperatureUnit}
@@ -71,31 +71,31 @@ export default function WeatherInfo() {
                     {/*{weatherData?.location.lat}° N, {weatherData?.location.lon}° E*/}
                     <div className="flex items-center justify-between">
                         <div>
-                            <div className="flex items-start text-xl">
+                            <div className="flex items-start text-sm md:text-xl pt-8 md:pt-2">
                                 <div className="flex gap-2">
                                     <Droplets/>
                                     <div>Humidity</div>
                                 </div>
                             </div>
-                            <div className="text-2xl font-bold">{weatherData.current.humidity}%</div>
+                            <div className="text-lg md:text-2xl font-bold">{weatherData.current.humidity}%</div>
                         </div>
                         <div>
-                            <div className="flex items-start text-xl">
+                            <div className="flex items-start  text-sm md:text-xl pt-8 md:pt-2">
                                 <div className="flex gap-2">
                                     <SunIcon/>
                                     <div>UV Index</div>
                                 </div>
                             </div>
-                            <div className="text-2xl font-bold">{weatherData.current.uv}</div>
+                            <div className="text-lg md:text-2xl font-bold">{weatherData.current.uv}</div>
                         </div>
                         <div>
-                            <div className="flex items-start text-xl">
+                            <div className="flex items-start  text-sm md:text-xl pt-8 md:pt-2">
                                 <div className="flex gap-2">
                                     <WindIcon/>
                                     <div>Wind Speed</div>
                                 </div>
                             </div>
-                            <div className="text-2xl font-bold">{weatherData.current.wind_kph} Km/h</div>
+                            <div className="text-lg md:text-2xl font-bold">{weatherData.current.wind_kph} Km/h</div>
                         </div>
                     </div>
                 </div>
