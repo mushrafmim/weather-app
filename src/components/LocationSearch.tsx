@@ -3,6 +3,7 @@ import {useState} from "react";
 import {SearchLocationType} from "@/types/SearchLocationType";
 import {searchLocations} from "@/requests";
 import {useCurrentWeather} from "@/context/CurrentWeatherContext";
+import {IconLocation} from "@tabler/icons-react";
 
 export default function LocationSearch() {
     const [searchKey, setSearchKey] = useState("Colombo, Sri Lanka")
@@ -20,6 +21,35 @@ export default function LocationSearch() {
         }
     };
 
+
+    const getLocation = () => {
+        if (!navigator.geolocation) {
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                console.log(position);
+                searchLocations(`${position.coords.latitude}, ${position.coords.longitude}`)
+                    .then(result => {
+                        if (result.length > 0) {
+                            const location = result[0];
+
+                            console.log(location);
+                            setCurrentLocation(location);
+                            setSearchKey(`${location.name}, ${location.country}`);
+                            setSearchLocationResults([]);
+                        } else {
+                            console.error("No locations found for current coordinates.");
+                        }
+                    })
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
+    };
+
     return (
         <>
             <div className="flex gap-2 items-center bg-white/40 rounded-lg shadow-sm p-2 relative">
@@ -30,6 +60,7 @@ export default function LocationSearch() {
                     onChange={(e) => handleSearch(e.target.value)}
                 />
                 {searchKey && <X className="cursor-pointer" size={20} onClick={() => setSearchKey("")}/>}
+                <IconLocation onClick={getLocation} />
             </div>
             <div className="relative bg-green w-full h-16">
                 {searchLocationResults.length > 0 && (
