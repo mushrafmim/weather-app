@@ -1,6 +1,15 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Weather App
+# Introduction
+This is a simple weather application built with Next.js, TypeScript, and Tailwind CSS. It fetches weather data from an external API and displays it in a user-friendly interface. The app is designed to be responsive and works well on both desktop and mobile devices.
 
-## Getting Started
+# Features
+- Fetches current weather data based on user location or city input. (Defaults to Colombo, Sri Lanka)
+- Displays temperature, humidity, wind speed, and weather conditions.
+- Forecasts the weather for the next 10 days.
+- Forecasts the weather for next 24 hours.
+- Search any location or get the weather based on your current location.
+
+## Setting Up the Project
 
 Install the dependencies:
 
@@ -11,7 +20,7 @@ npm install
 Then, Place the following API keys in a `.env.local` file at the root of your project:
 
 ```plaintext
-NEXT_PUBLIC_WEATHER_API_KEY=
+WEATHER_API_KEY=
 NEXT_PUBLIC_MAPS_API_KEY=
 ```
 
@@ -41,9 +50,3 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
