@@ -1,6 +1,6 @@
 "use client"
-import React, {createContext, useContext, useEffect, useState} from 'react';
-import {getForcast} from "@/requests";
+import React, {createContext, useCallback, useContext, useEffect, useState} from 'react';
+import {fetchForecast} from "@/requests";
 import {ForcastWeatherType} from "@/types/ForcastWeatherType";
 import {useCurrentWeather} from "@/context/CurrentWeatherContext";
 
@@ -22,13 +22,13 @@ export const WeatherForecastProvider: React.FC<{ children: React.ReactNode }> = 
     const [status, setStatus] = useState<RequestStatus>('loading');
     const [error, setError] = useState<string | null>(null);
 
-    const fetchForecastData = async () => {
+    const fetchForecastData = useCallback(async () => {
         setStatus('loading')
         setError(null);
         setForecastData(null);
         try {
             const location = `${currentLocation.lat},${currentLocation.lon}`
-            const data = await getForcast(location);
+            const data = await fetchForecast(location);
             if (data) {
                 setForecastData(data);
                 setStatus('success')
@@ -40,13 +40,13 @@ export const WeatherForecastProvider: React.FC<{ children: React.ReactNode }> = 
             setError(error instanceof Error ? error.message : 'An unknown error occurred');
             console.error("Error fetching weather data:", error);
         }
-    }
+    }, [currentLocation]);
 
     useEffect(() => {
         if (currentLocation) {
             fetchForecastData()
         }
-    }, [currentLocation]);
+    }, [currentLocation, fetchForecastData]);
 
     return (
         <WeatherForecastContext.Provider value={{status, forecastData, error, fetchForecastData}}>

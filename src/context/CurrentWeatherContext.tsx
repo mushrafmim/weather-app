@@ -1,5 +1,5 @@
 "use client"
-import React, {createContext, useContext, useEffect, useState} from 'react';
+import React, {createContext, useCallback, useContext, useEffect, useState} from 'react';
 import {SearchLocationType} from "@/types/SearchLocationType";
 import {CurrentWeatherType} from "@/types/CurrentWeatherType";
 import {fetchData} from "@/requests";
@@ -31,7 +31,7 @@ export const CurrentWeatherProvider: React.FC<{ children: React.ReactNode }> = (
     const [status, setStatus] = useState<RequestStatus>('loading');
     const [error, setError] = useState<string | null>(null);
 
-    const fetchWeatherData = async () => {
+    const fetchWeatherData = useCallback(async () => {
         setStatus('loading')
         setError(null);
         setWeatherData(null);
@@ -49,11 +49,11 @@ export const CurrentWeatherProvider: React.FC<{ children: React.ReactNode }> = (
             setError(error instanceof Error ? error.message : 'An unknown error occurred');
             console.error("Error fetching weather data:", error);
         }
-    }
+    }, [currentLocation]);
 
     useEffect(() => {
         fetchWeatherData()
-    }, [currentLocation]);
+    }, [currentLocation, fetchWeatherData]);
 
     return (
         <CurrentWeatherContext.Provider value={{status, weatherData, error, currentLocation, setCurrentLocation, fetchWeatherData}}>
